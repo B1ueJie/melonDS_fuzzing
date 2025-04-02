@@ -1,5 +1,5 @@
 # melonDS_fuzzing
-Centralized repo for fuzzing this emulator. Everything in the repo is set up to fuzz entirely within this repo, but we can just use it for file storage.
+Centralized repo for fuzzing this emulator. Everything in the repo is *supposed to be* (haven't gotten around to it yet) set up to fuzz entirely within this repo, but we can just use it for file storage.
 
 ## Using the repo as storage
 Store the crashing files in `crashfiles` and the ROMs in example\_roms.
