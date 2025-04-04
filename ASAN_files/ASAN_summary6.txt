@@ -1,0 +1,68 @@
+=================================================================
+==77079==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x515000680600 at pc 0x589a3371b526 bp 0x77e6758df290 sp 0x77e6758dea50
+READ of size 4096 at 0x515000680600 thread T14 (EmuThread)
+    #0 0x589a3371b525 in __asan_memcpy (/home/osboxes/melonDSOriginal/melonDS/asan_build/melonDS+0x1b9525) (BuildId: 0fac81606dc39b547edbfcdc3209adf70dd04c27)
+    #1 0x589a33c9f3bb in melonDS::NDSCart::ParseROM(std::unique_ptr<unsigned char [], std::default_delete<unsigned char []>>&&, unsigned int, void*, std::optional<melonDS::NDSCart::NDSCartArgs>&&) /home/osboxes/melonDSOriginal/melonDS/src/NDSCart.cpp:1615:5
+    #2 0x589a33811c81 in EmuInstance::loadROM(QList<QString>, bool, QString&) /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/EmuInstance.cpp:1909:17
+    #3 0x589a33836495 in EmuThread::handleMessages() /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/EmuThread.cpp:581:31
+    #4 0x589a338337ef in EmuThread::run() /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/EmuThread.cpp:462:9
+    #5 0x77e69ec7c48c  (/lib/x86_64-linux-gnu/libQt6Core.so.6+0x27c48c) (BuildId: 9b85b15d08445ceca32a75ffedf3453d8c6fab47)
+    #6 0x589a3371b15c in asan_thread_start(void*) asan_interceptors.cpp.o
+    #7 0x77e69e29caa3 in start_thread nptl/pthread_create.c:447:8
+    #8 0x77e69e329c3b in clone3 misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78
+
+0x515000680600 is located 0 bytes after 512-byte region [0x515000680400,0x515000680600)
+allocated by thread T14 (EmuThread) here:
+    #0 0x589a3375bdb1 in operator new[](unsigned long) (/home/osboxes/melonDSOriginal/melonDS/asan_build/melonDS+0x1f9db1) (BuildId: 0fac81606dc39b547edbfcdc3209adf70dd04c27)
+    #1 0x589a33819157 in std::__detail::_MakeUniq<unsigned char []>::__array std::make_unique<unsigned char []>(unsigned long) /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/unique_ptr.h:1085:30
+    #2 0x589a33cd167b in melonDS::PadToPowerOf2(std::unique_ptr<unsigned char [], std::default_delete<unsigned char []>>&&, unsigned int) /home/osboxes/melonDSOriginal/melonDS/src/Utils.cpp:37:20
+    #3 0x589a33c9f344 in melonDS::NDSCart::ParseROM(std::unique_ptr<unsigned char [], std::default_delete<unsigned char []>>&&, unsigned int, void*, std::optional<melonDS::NDSCart::NDSCartArgs>&&) /home/osboxes/melonDSOriginal/melonDS/src/NDSCart.cpp:1612:35
+    #4 0x589a33811c81 in EmuInstance::loadROM(QList<QString>, bool, QString&) /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/EmuInstance.cpp:1909:17
+    #5 0x589a33836495 in EmuThread::handleMessages() /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/EmuThread.cpp:581:31
+    #6 0x589a338337ef in EmuThread::run() /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/EmuThread.cpp:462:9
+    #7 0x77e69ec7c48c  (/lib/x86_64-linux-gnu/libQt6Core.so.6+0x27c48c) (BuildId: 9b85b15d08445ceca32a75ffedf3453d8c6fab47)
+    #8 0x589a3371b15c in asan_thread_start(void*) asan_interceptors.cpp.o
+
+Thread T14 (EmuThread) created by T0 here:
+    #0 0x589a33702fe5 in pthread_create (/home/osboxes/melonDSOriginal/melonDS/asan_build/melonDS+0x1a0fe5) (BuildId: 0fac81606dc39b547edbfcdc3209adf70dd04c27)
+    #1 0x77e69ec76eac in QThread::start(QThread::Priority) (/lib/x86_64-linux-gnu/libQt6Core.so.6+0x276eac) (BuildId: 9b85b15d08445ceca32a75ffedf3453d8c6fab47)
+    #2 0x589a337f974f in EmuInstance::EmuInstance(int) /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/EmuInstance.cpp:141:16
+    #3 0x589a33784174 in createEmuInstance() /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/main.cpp:136:21
+    #4 0x589a33786635 in main /home/osboxes/melonDSOriginal/melonDS/src/frontend/qt_sdl/main.cpp:352:5
+    #5 0x77e69e22a1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x77e69e22a28a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #7 0x589a33682824 in _start (/home/osboxes/melonDSOriginal/melonDS/asan_build/melonDS+0x120824) (BuildId: 0fac81606dc39b547edbfcdc3209adf70dd04c27)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/osboxes/melonDSOriginal/melonDS/asan_build/melonDS+0x1b9525) (BuildId: 0fac81606dc39b547edbfcdc3209adf70dd04c27) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x515000680380: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x515000680400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x515000680480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x515000680500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x515000680580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x515000680600:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x515000680680: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x515000680700: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x515000680780: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x515000680800: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x515000680880: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==77079==ABORTING
