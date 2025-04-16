@@ -1613,13 +1613,13 @@ std::unique_ptr<CartCommon> ParseROM(std::unique_ptr<u8[]>&& romdata, u32 romlen
     auto [cartrom, cartromsize] = PadToPowerOf2(std::move(romdata), romlen);
 
     NDSHeader header {};
-    std::cerr << "Size of header" << sizeof(header) << "Size of cart rom" << sizeof(cartrom.get()); 
+    
     if (cartromsize < sizeof(NDSHeader))
  {
     Log(LogLevel::Error, "NDSCart: ROM too small to contain valid NDS header\n");
     return nullptr;
 }
-
+    memcpy(&header, cartrom.get(), sizeof(header));
     bool dsi = header.IsDSi();
     bool badDSiDump = false;
 
