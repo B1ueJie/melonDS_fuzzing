@@ -1,0 +1,7 @@
+These are the results of running ASAN on some of the found crashes.
+
+To compile and run MelonDS with ASAN and reproduce these results build MelonDS with the following flags:
+-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS="-fsanitize=address -g" -DCMAKE_CXX_FLAGS="-fsanitize=address -g"
+cmake --build build -j7
+
+The results can be replicated using any of the files found in the crash folder.
